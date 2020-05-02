@@ -22,7 +22,7 @@ public class MozCsvFile {
 				data = line.split(",");
 
 				if (!data[0].contentEquals("LTE") || !data[1].contains("234")) continue;
-				if (data[4].isEmpty() || data[6].isEmpty() || data[7].isEmpty()) continue;
+				if (data[4].isEmpty() || data[5].isEmpty() || data[6].isEmpty() || data[7].isEmpty()) continue;
 
 				// Discard cellIds below 256 as they cause issues.
 				int cellId = Integer.parseUnsignedInt(data[4]);

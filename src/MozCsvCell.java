@@ -21,7 +21,7 @@ public class MozCsvCell {
 		this.mnc = Short.parseShort(data[2]);
 		this.tac = Integer.parseUnsignedInt(data[3]);
 		this.cellId = Integer.parseUnsignedInt(data[4]);
-		//this.pci = Short.parseShort(data[5]);
+		this.pci = Short.parseShort(data[5]);
 		this.lng = Float.parseFloat(data[6]);
 		this.lat = Float.parseFloat(data[7]);
 		this.range = Integer.parseUnsignedInt(data[8]);

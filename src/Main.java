@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.Map;
 
 public class Main {
@@ -10,9 +10,17 @@ public class Main {
         System.out.println("Loaded instance");
 
         Map<Short, Map<Integer, MozEnb>> cont = mozFile.getFileContents();
-        System.out.println("Got arraylist");
+        System.out.println("Copied data to local variable");
 
-        //System.out.println(cont.size());
+        Map<Short, Map<Integer, MozEnb>> sorted = new TreeMap<Short, Map<Integer, MozEnb>>(cont);
+        System.out.println("Converted to TreeMap object");
+
+        for (Map.Entry<Short, Map<Integer, MozEnb>> mnc : sorted.entrySet()) {
+            Map<Integer, MozEnb> enbList = mnc.getValue();
+            System.out.println(mnc.getKey() + " has " + enbList.size() + " eNBs");
+        }
+
+
     }
 
 }
