@@ -3,10 +3,10 @@ import java.util.Map;
 
 public class MozEnb {
 
-	public short eNb;
+	public int eNb;
 	public Map<Short, MozCsvCell> sectors;
 
-	public MozEnb(short eNb) {
+	public MozEnb(int eNb) {
 		this.eNb = eNb;
 		this.sectors = new HashMap<Short, MozCsvCell>();
 	}

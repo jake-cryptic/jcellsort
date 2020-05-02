@@ -4,8 +4,18 @@ public class CellID {
 		String tmp = Integer.toBinaryString(cellId);
 
 		int[] ret = new int[2];
-		ret[0] = Integer.parseInt(tmp.substring(0, tmp.length() - 8), 2);
-		ret[1] = Integer.parseInt(tmp.substring(tmp.length() - 8, tmp.length()), 2);
+		int lim = tmp.length() - 8;
+		try {
+			ret[0] = Integer.parseInt(tmp.substring(0, lim), 2);
+			ret[1] = Integer.parseInt(tmp.substring(lim), 2);
+		} catch (StringIndexOutOfBoundsException e){
+			e.printStackTrace();
+			System.out.println(lim);
+			System.out.println(cellId);
+			System.out.println(tmp);
+			System.out.println(tmp.length());
+			System.exit(-2);
+		}
 
 		return ret;
 	}

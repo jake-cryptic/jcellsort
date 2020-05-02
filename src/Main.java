@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Main {
 
@@ -8,10 +9,10 @@ public class Main {
         MozCsvFile mozFile = new MozCsvFile(path);
         System.out.println("Loaded instance");
 
-        ArrayList<MozCsvCell> cont = mozFile.getFileContents();
+        Map<Short, Map<Integer, MozEnb>> cont = mozFile.getFileContents();
         System.out.println("Got arraylist");
 
-        System.out.println(cont.size());
+        //System.out.println(cont.size());
     }
 
 }
