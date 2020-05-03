@@ -34,8 +34,8 @@ public class MozCsvCell {
 		this.sectorId = (short) cellData[1];
 	}
 
-	public boolean isValid() {
-		return CellFilter.filter_uk(this.mcc, this.eNb, this.sectorId);
+	public boolean isValid(CellFilter cf) {
+		return cf.filter_uk(this.mnc, this.eNb, this.sectorId);
 	}
 
 	public String getRat() {

@@ -33,7 +33,23 @@ public class CellDatabase {
 	}
 
 	public void insertSectors(MozCsvCell cell) {
-		//statement.setString();
+		try {
+			statement.setShort(0, cell.getMnc());
+			statement.setInt(1, cell.getEnb());
+			statement.setShort(2, cell.getSectorId());
+			statement.setShort(3, cell.getPci());
+			statement.setFloat(4, cell.getLat());
+			statement.setFloat(5, cell.getLng());
+			statement.setInt(6, cell.getSamples());
+			statement.setInt(7, cell.getCreated());
+			statement.setInt(8, cell.getUpdated());
+
+			if (statement.execute()) {
+				System.out.println("Inserted eNB: " + cell.getEnb());
+			}
+		} catch (SQLException ex) {
+
+		}
 	}
 
 }

@@ -1,3 +1,5 @@
+import javafx.scene.control.Cell;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ public class MozCsvFile {
 
 	public Map<Short, Map<Integer, MozEnb>> mncList;
 	public ArrayList<MozCsvCell> cellList;
+	public CellFilter cf = new CellFilter();
 
 	public MozCsvFile(String filepath) {
 		mncList = new HashMap<Short, Map<Integer, MozEnb>>();
@@ -29,6 +32,9 @@ public class MozCsvFile {
 				if (cellId <= 256) continue;
 
 				MozCsvCell tmpCell = new MozCsvCell(data);
+
+				// Check that sector ID and eNB are valid for UK
+				if (!tmpCell.isValid(cf)) continue;
 
 				// Check if MNC exists (if not add it)
 				short mnc = tmpCell.getMnc();

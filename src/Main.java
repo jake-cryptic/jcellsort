@@ -1,6 +1,5 @@
 import java.util.TreeMap;
 import java.util.Map;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -17,14 +16,18 @@ public class Main {
         System.out.println("Converted to TreeMap object");
 
         CellDatabase db = new CellDatabase();
-        db.prepareStatement("INSERT INTO sectors (id, mnc, enodeb_id, sector_id, pci, lat, lng, samples, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        db.prepareStatement("INSERT INTO sectors (mnc, enodeb_id, sector_id, pci, lat, lng, samples, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         for (Map.Entry<Short, Map<Integer, MozEnb>> mnc : sorted.entrySet()) {
             Map<Integer, MozEnb> enbList = mnc.getValue();
             System.out.println(mnc.getKey() + " has " + enbList.size() + " eNBs");
 
             for (Map.Entry<Integer, MozEnb> enb : enbList.entrySet()) {
-                System.out.println(enb.getValue());
+                MozEnb thisEnb = enb.getValue();
+
+                for (Map.Entry<Short, MozCsvCell> sector : thisEnb.sectors.entrySet()) {
+					//db.insertSectors(sector.getValue());
+				}
             }
         }
     }
