@@ -15,8 +15,10 @@ public class Main {
         Map<Short, Map<Integer, MozEnb>> sorted = new TreeMap<Short, Map<Integer, MozEnb>>(cont);
         System.out.println("Converted to TreeMap object");
 
-        CellDatabase db = new CellDatabase();
-        db.prepareStatement("INSERT INTO sectors (mnc, enodeb_id, sector_id, pci, lat, lng, samples, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        CellDatabase cells = new CellDatabase();
+        CellDatabase sites = new CellDatabase();
+		cells.prepareStatement("INSERT INTO sectors (mnc, enodeb_id, sector_id, pci, lat, lng, samples, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		sites.prepareStatement("INSERT INTO masts (mnc, enodeb_id, lat, lng, updated) VALUES (?, ?, ?, ?, ?)");
 
         for (Map.Entry<Short, Map<Integer, MozEnb>> mnc : sorted.entrySet()) {
             Map<Integer, MozEnb> enbList = mnc.getValue();
@@ -26,10 +28,15 @@ public class Main {
                 MozEnb thisEnb = enb.getValue();
 
                 for (Map.Entry<Short, MozCsvCell> sector : thisEnb.sectors.entrySet()) {
-					//db.insertSectors(sector.getValue());
+					cells.insertSectors(sector.getValue());
 				}
+
+				sites.insertEnb(thisEnb, mnc.getKey());
             }
         }
+
+		cells.finish();
+		sites.finish();
     }
 
 }

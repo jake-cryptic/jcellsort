@@ -64,6 +64,7 @@ public class CellFilter {
 					if (eNb > 20000)
 						return false;
 				}
+				break;
 			case 30:
 				if (eNb > 40000 || eNb < 10000)
 					return false;

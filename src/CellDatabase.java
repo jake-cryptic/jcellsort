@@ -25,6 +25,7 @@ public class CellDatabase {
 	public void prepareStatement(String sql) {
 		try {
 			statement = conn.prepareStatement(sql);
+			conn.setAutoCommit(false);
 		} catch (SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
@@ -34,21 +35,40 @@ public class CellDatabase {
 
 	public void insertSectors(MozCsvCell cell) {
 		try {
-			statement.setShort(0, cell.getMnc());
-			statement.setInt(1, cell.getEnb());
-			statement.setShort(2, cell.getSectorId());
-			statement.setShort(3, cell.getPci());
-			statement.setFloat(4, cell.getLat());
-			statement.setFloat(5, cell.getLng());
-			statement.setInt(6, cell.getSamples());
-			statement.setInt(7, cell.getCreated());
-			statement.setInt(8, cell.getUpdated());
-
-			if (statement.execute()) {
-				System.out.println("Inserted eNB: " + cell.getEnb());
-			}
+			statement.setShort(1, cell.getMnc());
+			statement.setInt(2, cell.getEnb());
+			statement.setShort(3, cell.getSectorId());
+			statement.setShort(4, cell.getPci());
+			statement.setFloat(5, cell.getLat());
+			statement.setFloat(6, cell.getLng());
+			statement.setInt(7, cell.getSamples());
+			statement.setInt(8, cell.getCreated());
+			statement.setInt(9, cell.getUpdated());
+			statement.executeUpdate();
 		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
 
+	public void insertEnb(MozEnb enb, short mnc) {
+		try {
+			float[] enbLoc = enb.calculateLocation();
+			statement.setShort(1, mnc);
+			statement.setInt(2, enb.getEnb());
+			statement.setFloat(3, enbLoc[0]);
+			statement.setFloat(4, enbLoc[1]);
+			statement.setFloat(5, enb.getLastUpdated());
+			statement.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void finish() {
+		try {
+			conn.commit();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
 	}
 
