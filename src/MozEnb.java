@@ -15,4 +15,13 @@ public class MozEnb {
 		this.sectors.put(id, row);
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<MozEnb::")
+			.append(eNb)
+			.append("->")
+			.append(sectors.size())
+			.append(">");
+		return sb.toString();
+	}
 }

@@ -4,7 +4,7 @@ public class MozCsvCell {
 	private short mcc;
 	private short mnc;
 	private int cellId;
-	private int enodeb;
+	private int eNb;
 	private short sectorId;
 	private int tac;
 	private short pci;
@@ -30,8 +30,12 @@ public class MozCsvCell {
 		this.updated = Integer.parseUnsignedInt(data[12]);
 
 		int[] cellData = CellID.convertToEnb(this.cellId);
-		this.enodeb = cellData[0];
+		this.eNb = cellData[0];
 		this.sectorId = (short) cellData[1];
+	}
+
+	public boolean isValid() {
+		return CellFilter.filter_uk(this.mcc, this.eNb, this.sectorId);
 	}
 
 	public String getRat() {
@@ -47,7 +51,7 @@ public class MozCsvCell {
 	}
 
 	public int getEnb() {
-		return this.enodeb;
+		return this.eNb;
 	}
 
 	public short getSectorId() {
