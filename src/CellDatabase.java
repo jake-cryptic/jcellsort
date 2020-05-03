@@ -10,9 +10,7 @@ public class CellDatabase {
 
 	public CellDatabase() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/lte_jcellsort?user=root");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/lte_jcellsort?user=root&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT");
 		} catch (SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
@@ -34,7 +32,7 @@ public class CellDatabase {
 	}
 
 	public void insertSectors(MozCsvCell cell) {
-		//statement.setString()
+		//statement.setString();
 	}
 
 }

@@ -34,6 +34,14 @@ public class MozCsvCell {
 		this.sectorId = (short) cellData[1];
 	}
 
+	public String getRat() {
+		return rat;
+	}
+
+	public short getMcc() {
+		return mcc;
+	}
+
 	public short getMnc() {
 		return this.mnc;
 	}
@@ -46,4 +54,31 @@ public class MozCsvCell {
 		return this.sectorId;
 	}
 
+	public short getPci() {
+		return pci;
+	}
+
+	public float getLat() {
+		return lat;
+	}
+
+	public float getLng() {
+		return lng;
+	}
+
+	public int getSamples() {
+		return samples;
+	}
+
+	public int getRange() {
+		return range;
+	}
+
+	public int getCreated() {
+		return created;
+	}
+
+	public int getUpdated() {
+		return updated;
+	}
 }
