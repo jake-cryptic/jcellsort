@@ -48,6 +48,28 @@ public class CellFilter {
 			return false;
 		}
 
+		switch (mnc) {
+			case 10:
+				if (eNb > 18000 && eNb <= 100000) return false;
+				if (eNb > 150000 && eNb < 500000) return false;
+				if (eNb > 560000 && eNb < 1000000) return false;
+				if (eNb > 1100000) return false;
+				break;
+			case 15:
+				if (eNb > 18000 && eNb < 500000) return false;
+				if (eNb > 560000) return false;
+				break;
+			case 20:
+				if (eNb < 50000 || eNb > 50500) {
+					if (eNb > 20000)
+						return false;
+				}
+			case 30:
+				if (eNb > 40000 || eNb < 10000)
+					return false;
+				break;
+		}
+
 		return true;
 	}
 
