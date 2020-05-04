@@ -36,12 +36,12 @@ public class MozEnb {
 
 		for (Map.Entry<Short, MozCsvCell> sector : this.sectors.entrySet()) {
 			MozCsvCell thisCell = sector.getValue();
+			counter = Math.ceil(Math.log(thisCell.getSamples())) + 1;
 
-			latTotal = latTotal + thisCell.getLat();
-			lngTotal = lngTotal + thisCell.getLng();
+			latTotal = latTotal + (thisCell.getLat() * (int) counter);
+			lngTotal = lngTotal + (thisCell.getLng() * (int) counter);
 
-			counter = Math.ceil(Math.log(thisCell.getSamples()));
-			divisor = divisor + (int) counter + 1;
+			divisor = divisor + (int) counter;
 		}
 
 		output[0] = latTotal / divisor;

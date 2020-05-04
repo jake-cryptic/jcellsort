@@ -4,7 +4,7 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        String path = "D:\\MLS-full-cell-export-2020-05-03T000000.csv";
+        String path = "D:\\MLS-full-cell-export-2020-05-04T000000.csv";
 
         MozCsvFile mozFile = new MozCsvFile(path);
         System.out.println("Loaded instance");
