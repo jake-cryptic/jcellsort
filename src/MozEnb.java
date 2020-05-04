@@ -32,16 +32,24 @@ public class MozEnb {
 		float[] output = new float[2];
 		float latTotal = 0, lngTotal = 0;
 		int divisor = 0;
-		double counter;
+		double samplesAdjust, cellRange, cellWeight;
 
 		for (Map.Entry<Short, MozCsvCell> sector : this.sectors.entrySet()) {
 			MozCsvCell thisCell = sector.getValue();
-			counter = Math.ceil(Math.log(thisCell.getSamples())) + 1;
 
-			latTotal = latTotal + (thisCell.getLat() * (int) counter);
-			lngTotal = lngTotal + (thisCell.getLng() * (int) counter);
+			// Account for large number of samples
+			samplesAdjust = Math.ceil(Math.log(thisCell.getSamples())) + 1;
 
-			divisor = divisor + (int) counter;
+			// Account for cell with huge range
+			//cellRange = (Math.log(thisCell.getRange() + 1) + 1);
+
+			// Create a weight for each sector on a cell
+			cellWeight = samplesAdjust; // * cellRange + 1;
+
+			latTotal = latTotal + (thisCell.getLat() * (int) cellWeight);
+			lngTotal = lngTotal + (thisCell.getLng() * (int) cellWeight);
+
+			divisor = divisor + (int) cellWeight;
 		}
 
 		output[0] = latTotal / divisor;
