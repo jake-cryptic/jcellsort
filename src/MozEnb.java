@@ -87,9 +87,9 @@ public class MozEnb {
 
 			// Account for bad sectors
 			float[] deviations = this.calculateDeviationsFromMean(new float[] {thisCell.getLat(), thisCell.getLng()});
-			float accountedDistance = 3;
-			if (deviations[0] > 0.25 || deviations[1] > 0.25) {
-				float totalDeviation = deviations[0] + deviations[1];
+			float accountedDistance = 4;
+			if (deviations[0] > 0.1 || deviations[1] > 0.1) {
+				float totalDeviation = (deviations[0] + deviations[1]);
 				accountedDistance = -1 * (float) Math.abs(0.2 * Math.pow(totalDeviation, 2)) + 3;
 				if (accountedDistance < 0) {
 					accountedDistance = 0;
@@ -97,7 +97,7 @@ public class MozEnb {
 			}
 
 			// Create a weight for each sector on a cell
-			cellWeight = samplesAdjust + Math.exp(accountedDistance); // * cellRange + 1;
+			cellWeight = samplesAdjust + accountedDistance; // * cellRange + 1;
 
 			latTotal = latTotal + (thisCell.getLat() * (int) cellWeight);
 			lngTotal = lngTotal + (thisCell.getLng() * (int) cellWeight);
