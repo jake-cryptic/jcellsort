@@ -1,4 +1,4 @@
-public class CellID {
+public class Misc {
 
 	public static int[] convertToEnb(int cellId) {
 		String tmp = Integer.toBinaryString(cellId);
@@ -18,6 +18,20 @@ public class CellID {
 		}
 
 		return ret;
+	}
+
+	public static float calculateStandardDeviation(float[] array) {
+		double total = 0, totalSquared = 0, standardDeviation = 0;
+		int numCount = array.length;
+
+		for (float val : array) {
+			total = total + val;
+			totalSquared = totalSquared + Math.pow(val, 2);
+		}
+
+		standardDeviation = Math.sqrt(numCount * totalSquared - Math.pow(total, 2)) / numCount;
+
+		return (float) standardDeviation;
 	}
 
 }

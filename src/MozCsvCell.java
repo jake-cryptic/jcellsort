@@ -29,7 +29,7 @@ public class MozCsvCell {
 		this.created = Integer.parseUnsignedInt(data[11]);
 		this.updated = Integer.parseUnsignedInt(data[12]);
 
-		int[] cellData = CellID.convertToEnb(this.cellId);
+		int[] cellData = Misc.convertToEnb(this.cellId);
 		this.eNb = cellData[0];
 		this.sectorId = (short) cellData[1];
 	}
