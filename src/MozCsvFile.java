@@ -9,9 +9,12 @@ public class MozCsvFile {
 	public ArrayList<MozCsvCell> cellList;
 	public CellFilter cf = new CellFilter();
 
-	public MozCsvFile(String filepath) {
+	public MozCsvFile() {
 		mncList = new HashMap<Short, Map<Integer, MozEnb>>();
 		cellList = new ArrayList<MozCsvCell>();
+	}
+
+	public void parseCsvFile(String filepath) {
 		String line;
 		String[] data;
 

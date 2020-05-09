@@ -71,6 +71,11 @@ public class MozEnb {
 	public float[] calculateLocation() {
 		this.calculateSectorStats();
 
+		// All sectors are the same!
+		if (this.sectStdDev[0] == 0.0 && this.sectStdDev[1] == 0.0) {
+			return this.sectMean;
+		}
+
 		float[] output = new float[2];
 		float latTotal = 0, lngTotal = 0;
 		int divisor = 0;

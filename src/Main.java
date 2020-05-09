@@ -4,9 +4,12 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        String path = "D:\\MLS-full-cell-export-2020-05-04T000000.csv";
+        String mlsFile = "D:\\MLS-full-cell-export-2020-05-08T000000.csv";
+        String ociFile = "D:\\cell_towers_2020-05-08-T000000.csv";
 
-        MozCsvFile mozFile = new MozCsvFile(path);
+        MozCsvFile mozFile = new MozCsvFile();
+        mozFile.parseCsvFile(mlsFile);
+        //mozFile.parseCsvFile(ociFile);
         System.out.println("Loaded instance");
 
         Map<Short, Map<Integer, MozEnb>> cont = mozFile.getFileContents();
