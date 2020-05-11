@@ -82,7 +82,16 @@ public class MozCsvCell {
 		return created;
 	}
 
+	public void setCreated(int created) {
+		this.created = created;
+	}
+
 	public int getUpdated() {
 		return updated;
 	}
+
+	public void setUpdated(int updated) {
+		this.updated = updated;
+	}
+
 }

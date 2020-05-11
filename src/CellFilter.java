@@ -50,13 +50,13 @@ public class CellFilter {
 
 		switch (mnc) {
 			case 10:
-				if (eNb > 18000 && eNb <= 100000) return false;
+				if (eNb > 15000 && eNb <= 100000) return false;
 				if (eNb > 150000 && eNb < 500000) return false;
 				if (eNb > 560000 && eNb < 1000000) return false;
 				if (eNb > 1100000) return false;
 				break;
 			case 15:
-				if (eNb > 18000 && eNb < 500000) return false;
+				if (eNb < 5 || (eNb > 15000 && eNb < 500000)) return false;
 				if (eNb > 560000) return false;
 				break;
 			case 20:

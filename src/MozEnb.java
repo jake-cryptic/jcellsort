@@ -28,7 +28,20 @@ public class MozEnb {
 		if (row.getUpdated() > this.lastUpdated) {
 			this.lastUpdated = row.getUpdated();
 		}
-		this.sectors.put(id, row);
+		if (!this.sectors.containsKey(id)) {
+			this.sectors.put(id, row);
+		} else {
+			MozCsvCell updatedRow = this.sectors.get(id);
+			
+			if (updatedRow.getCreated() > row.getCreated()) {
+				updatedRow.setCreated(row.getCreated());
+			}
+			if (updatedRow.getUpdated() < row.getUpdated()) {
+				updatedRow.setUpdated(row.getUpdated());
+			}
+
+			this.sectors.put(id, updatedRow);
+		}
 	}
 
 	private void calculateSectorStats() {

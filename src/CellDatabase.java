@@ -2,7 +2,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.TimeZone;
 
 public class CellDatabase {
@@ -61,9 +60,6 @@ public class CellDatabase {
 			statement.setFloat(5, enb.getLastUpdated());
 			statement.executeUpdate();
 		} catch (SQLException ex) {
-			for (Map.Entry<Short, MozCsvCell> sector : enb.sectors.entrySet()) {
-				System.out.println("- " + sector.getValue().getRange());
-			}
 			ex.printStackTrace();
 		}
 	}
