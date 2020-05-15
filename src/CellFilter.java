@@ -38,6 +38,10 @@ public class CellFilter {
 			case 30:
 				sector_list = valid_ee_sectors;
 				break;
+			case 55:
+				return eNb <= 300;
+			case 58:
+				return eNb <= 100;
 			default:
 				sector_list = new short[]{};
 				break;
