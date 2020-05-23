@@ -4,12 +4,21 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        String mlsFile = "D:\\MLS-full-cell-export-2020-05-09T000000.csv";
-        String ociFile = "D:\\cell_towers_2020-05-08-T000000.csv";
+    	String[] files = new String[]{
+			"D:\\MLS-full-cell-export-2020-05-23T000000.csv",
+    		"C:\\WebServer73\\htdocs\\mls_mapper\\new\\data\\234-2019-04-20.csv",
+    		"C:\\WebServer73\\htdocs\\mls_mapper\\new\\data\\234-2019-05-15.csv",
+    		"C:\\WebServer73\\htdocs\\mls_mapper\\new\\data\\234-2019-06-18.csv",
+    		"C:\\WebServer73\\htdocs\\mls_mapper\\new\\data\\234-2019-10-12.csv",
+    		"C:\\WebServer73\\htdocs\\mls_mapper\\new\\data\\234-2020-01-02.csv",
+			"D:\\cell_towers_2020-05-21-T000000.csv",
+			"D:\\cell_towers_2020-05-13-T000000.csv"
+		};
 
         MozCsvFile mozFile = new MozCsvFile();
-        mozFile.parseCsvFile(mlsFile);
-        mozFile.parseCsvFile(ociFile);
+        for (String file : files) {
+			mozFile.parseCsvFile(file);
+		}
         System.out.println("Loaded instance");
 
         Map<Short, Map<Integer, MozEnb>> cont = mozFile.getFileContents();
@@ -20,8 +29,8 @@ public class Main {
 
         CellDatabase cells = new CellDatabase();
         CellDatabase sites = new CellDatabase();
-		cells.prepareStatement("INSERT INTO sectors (mnc, enodeb_id, sector_id, pci, lat, lng, samples, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		sites.prepareStatement("INSERT INTO masts (mnc, enodeb_id, lat, lng, updated) VALUES (?, ?, ?, ?, ?)");
+		cells.prepareStatement("INSERT INTO sectors (mcc, mnc, enodeb_id, sector_id, pci, lat, lng, samples, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		sites.prepareStatement("INSERT INTO masts (mcc, mnc, enodeb_id, lat, lng, updated) VALUES (?, ?, ?, ?, ?, ?)");
 
         for (Map.Entry<Short, Map<Integer, MozEnb>> mnc : sorted.entrySet()) {
             Map<Integer, MozEnb> enbList = mnc.getValue();
@@ -34,7 +43,7 @@ public class Main {
 					cells.insertSectors(sector.getValue());
 				}
 
-				sites.insertEnb(thisEnb, mnc.getKey());
+				sites.insertEnb(thisEnb, (short)234, mnc.getKey());
             }
         }
 

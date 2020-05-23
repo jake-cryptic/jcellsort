@@ -32,7 +32,7 @@ public class MozEnb {
 			this.sectors.put(id, row);
 		} else {
 			MozCsvCell updatedRow = this.sectors.get(id);
-			
+
 			if (updatedRow.getCreated() > row.getCreated()) {
 				updatedRow.setCreated(row.getCreated());
 			}
