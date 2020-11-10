@@ -115,7 +115,7 @@ public class MozEnb {
 			}
 
 			// Create a weight for each sector on a cell
-			cellWeight = samplesAdjust + accountedDistance; // * cellRange + 1;
+			cellWeight = samplesAdjust * accountedDistance; // * cellRange + 1;
 
 			latTotal = latTotal + (thisCell.getLat() * (int) cellWeight);
 			lngTotal = lngTotal + (thisCell.getLng() * (int) cellWeight);

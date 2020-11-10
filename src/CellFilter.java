@@ -1,7 +1,7 @@
 public class CellFilter {
 
 	private final short[] valid_ee_sectors = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24
 	};
 	private final short[] valid_h3_sectors = {
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 71, 72, 73, 74, 75, 76
@@ -48,7 +48,7 @@ public class CellFilter {
 		}
 
 		if (!sectorValid(sectorId, sector_list)) {
-			System.out.println("Invalid sector->234-" + mnc + " eNB: " + eNb + "|" + sectorId);
+			// System.out.println("Invalid sector->234-" + mnc + " eNB: " + eNb + "|" + sectorId);
 			return false;
 		}
 
